@@ -4,7 +4,7 @@ import os
 from themes import coloring
 import Paginator
 
-bot = commands.AutoShardedBot(command_prefix="+",
+bot = commands.AutoShardedBot(command_prefix="-",
                               intents=discord.Intents().all(),
                               help_command=None,
                               shard_count=1)
