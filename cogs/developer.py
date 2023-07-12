@@ -5,7 +5,7 @@ from themes import coloring
 
 async def type(ctx):
     async with ctx.typing():
-            await asyncio.sleep(0.5)
+            await asyncio.sleep(0.2)
 
 class IMGBRANDING(discord.ui.View):
     @discord.ui.button(label="IMG", style=discord.ButtonStyle.blurple, disabled=True)
