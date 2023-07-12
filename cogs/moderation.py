@@ -6,7 +6,12 @@ class Moderation(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.group()
+    async def m(self, ctx):
+        if ctx.invoked_subcommand is None:
+            await ctx.send("test")
+
+    @m.command()
     @commands.has_permissions(manage_messages=True)
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def clear(self, ctx, count: int):
@@ -16,7 +21,7 @@ class Moderation(commands.Cog):
         await ctx.channel.purge(limit=count)
         await ctx.send(embed=embed)
 
-    @commands.command()
+    @m.command()
     @commands.has_permissions(kick_members=True)
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def kick(self, ctx, member: discord.Member, *, reason = None):
@@ -33,7 +38,7 @@ class Moderation(commands.Cog):
         await ctx.send(embed=embed)
         await member.send(embed=dmembed)
 
-    @commands.command()
+    @m.command()
     @commands.has_permissions(manage_messages=True)
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def slowmode(self, ctx, seconds: int):

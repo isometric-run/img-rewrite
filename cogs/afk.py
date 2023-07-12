@@ -7,7 +7,12 @@ class AFK(commands.Cog):
         self.bot = bot
         self.data = []
 
-    @commands.command()
+    @commands.group()
+    async def a(self, ctx):
+        if ctx.invoked_subcommand is None:
+            await ctx.send("test")
+
+    @a.command()
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def afk(self, ctx, *args):
         msg = ' '.join(args)

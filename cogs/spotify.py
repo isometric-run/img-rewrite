@@ -8,25 +8,24 @@ class Spotify(commands.Cog):
         self.bot = bot
 
     # Spotify command
-    @commands.group(name="spotify", aliases=["sp"], invoke_without_command=True)
-    async def spotify(self, ctx, target: discord.User = None):
-        if ctx.command.is_on_cooldown(ctx):
-            return
+    @commands.group()
+    async def s(self, ctx):
+        if ctx.invoked_subcommand is None:
         
-        embed = discord.Embed(
-            color=coloring.GRAY,
-            title="spotify",
-            description="track your spotify in real-time"
-        )
-        embed.set_author(name=self.bot.user.name, icon_url=self.bot.user.display_avatar)
-        embed.add_field(name="category", value="spotify", inline=True)
-        embed.add_field(name="aliases", value="`sp`", inline=True)
-        embed.add_field(name="usage", value="```>spotify [subcommand]```", inline=False)
-        embed.set_footer(text="song, album", icon_url="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png")
-        await ctx.send(embed=embed)
+            embed = discord.Embed(
+                color=coloring.GRAY,
+                title="spotify",
+                description="track your spotify in real-time"
+            )
+            embed.set_author(name=self.bot.user.name, icon_url=self.bot.user.display_avatar)
+            embed.add_field(name="category", value="spotify", inline=True)
+            embed.add_field(name="aliases", value="`sp`", inline=True)
+            embed.add_field(name="usage", value="```>spotify [subcommand]```", inline=False)
+            embed.set_footer(text="song, album", icon_url="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png")
+            await ctx.send(embed=embed)
 
     # Spotify command
-    @spotify.command(aliases=["cover"])
+    @s.command(aliases=["cover"])
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def album(self, ctx, target: discord.User = None):
         target = target or ctx.author
@@ -50,9 +49,9 @@ class Spotify(commands.Cog):
         embed.set_image(url="https://r2.e-z.host/300a8f3b-4721-4cf0-b415-1a823ac14d47/9z6qolgg.png")
         await ctx.send(embed=embed)
 
-    @spotify.command(aliases=["song", "np"])
+    @s.command()
     @commands.cooldown(1, 5, commands.BucketType.user)
-    async def track(self, ctx, target: discord.Member = None):
+    async def np(self, ctx, target: discord.Member = None):
         target = target or ctx.author
         for activity in target.activities:
             print(activity)

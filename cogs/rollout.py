@@ -9,11 +9,11 @@ class Rollouts(commands.Cog):
         self.bot = bot
     
     @commands.group()
-    async def p(self, ctx):
+    async def r(self, ctx):
         if ctx.invoked_subcommand is None:
             await ctx.send("test")
 
-    @p.command()
+    @r.command()
     async def rollouts(self, ctx, name):
         url = "https://raw.githubusercontent.com/discordexperimenthub/assyst-tags/main/experiment-rollout/data.json"
 

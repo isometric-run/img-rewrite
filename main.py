@@ -41,7 +41,7 @@ async def on_connect():
 async def on_ready():
     print(f"Logged in as {bot.user.name}")
     await bot.load_extension('jishaku')
-    await bot.change_presence(activity=discord.Game(name="Hi!"),
+    await bot.change_presence(activity=discord.Game(name=f"Meet {bot.user.name}!"),
                               status=discord.Status.idle)
 
     for f in os.listdir("./cogs"):

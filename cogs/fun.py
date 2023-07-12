@@ -15,7 +15,12 @@ class Fun(commands.Cog):
         self.bot = bot
         self.engine = pyttsx3.init()
 
-    @commands.command()
+    @commands.group()
+    async def f(self, ctx):
+         if ctx.invoked_subcommand is None:
+              await ctx.send("provide cmd")
+
+    @f.command()
     async def gif(seld,ctx,*,q="random"):
         await type(ctx)
         api_key="yVUciQy7vpc1o0JX2WrUACUNaLz8e5GN"

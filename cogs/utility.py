@@ -7,9 +7,14 @@ class Utility(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
-    @commands.command(aliases=['av'])
+    @commands.group()
+    async def u(self, ctx):
+        if ctx.invoked_subcommand is None:
+            await ctx.send("Specify CMD")
+
+    @u.command()
     @commands.cooldown(1, 5, commands.BucketType.user)
-    async def avatar(self, ctx, user: discord.Member = None): # type: ignore
+    async def av(self, ctx, user: discord.Member = None): # type: ignore
         if user == None:
             user = ctx.author
 
@@ -23,7 +28,7 @@ class Utility(commands.Cog):
 
         await ctx.send(embed=embed)
 
-    @commands.command()
+    @u.command()
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def banner(self, ctx, user: discord.Member = None):
         user = user or ctx.author
@@ -43,7 +48,7 @@ class Utility(commands.Cog):
 
         await ctx.send(embed=embed)
 
-    @commands.command()
+    @u.command()
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def servericon(self, ctx, server: discord.Guild = None):
         server = server or ctx.guild
@@ -58,7 +63,7 @@ class Utility(commands.Cog):
         embed.set_image(url=server.icon)
         await ctx.send(embed=embed)
 
-    @commands.command()
+    @u.command()
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def serverbanner(self, ctx, server: discord.Guild = None):
         server = server or ctx.guild
