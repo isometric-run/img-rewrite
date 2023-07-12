@@ -3,6 +3,11 @@ from discord.ext import commands
 import datetime, pytz
 from themes import coloring
 
+class MyView(discord.ui.View):
+    @discord.ui.button(label="@w3mbu", style=discord.ButtonStyle.primary, disabled=True)
+    async def button_callback(self, button, interaction):
+        await interaction.response.send_message("You clicked the button!") 
+
 class Spotify(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -22,7 +27,7 @@ class Spotify(commands.Cog):
             embed.add_field(name="aliases", value="`sp`", inline=True)
             embed.add_field(name="usage", value="```>spotify [subcommand]```", inline=False)
             embed.set_footer(text="song, album", icon_url="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png")
-            await ctx.send(embed=embed)
+            await ctx.send(embed=embed, view=MyView())
 
     # Spotify command
     @s.command(aliases=["cover"])
@@ -38,7 +43,7 @@ class Spotify(commands.Cog):
                 embed.set_author(name=target.display_name, icon_url=target.display_avatar)
                 embed.set_footer(text=activity.album)
                 embed.set_image(url=activity.album_cover_url)
-                return await ctx.send(embed=embed)
+                return await ctx.send(embed=embed, view=MyView())
             
         embed = discord.Embed(
             color=coloring.GRAY,
@@ -47,7 +52,7 @@ class Spotify(commands.Cog):
         embed.set_author(name=target.display_name, icon_url=target.display_avatar)
         embed.set_footer(text="make sure your status is showing!")
         embed.set_image(url="https://r2.e-z.host/300a8f3b-4721-4cf0-b415-1a823ac14d47/9z6qolgg.png")
-        await ctx.send(embed=embed)
+        await ctx.send(embed=embed, view=MyView())
 
     @s.command()
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -72,7 +77,7 @@ class Spotify(commands.Cog):
                 embed.set_author(name=target.display_name, icon_url=target.display_avatar)
                 embed.set_footer(text=formatted_duration)
                 embed.set_thumbnail(url=activity.album_cover_url)
-                return await ctx.send(embed=embed)
+                return await ctx.send(embed=embed, view=MyView())
 
         embed = discord.Embed(
             color=coloring.GRAY,
@@ -81,7 +86,7 @@ class Spotify(commands.Cog):
         embed.set_author(name=self.bot.user.name, icon_url=self.bot.user.display_avatar)
         embed.set_footer(text="make sure your status is showing!")
         embed.set_image(url="https://r2.e-z.host/300a8f3b-4721-4cf0-b415-1a823ac14d47/9z6qolgg.png")
-        return await ctx.send(embed=embed)
+        return await ctx.send(embed=embed, view=MyView())
 
 async def setup(bot):
     await bot.add_cog(Spotify(bot))
