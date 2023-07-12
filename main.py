@@ -17,7 +17,11 @@ async def on_command_error(ctx, error):
     elif isinstance(error, commands.MissingRequiredArgument):
         await ctx.send("Missing required argument.")
     elif isinstance(error, commands.CommandOnCooldown):
-         await ctx.send(f"{round(error.retry_after, 2)} seconds left")
+         embed = discord.Embed(title="",
+                               description="<:TimeOut:1128583955772354601> This command is on cooldown.",
+                               color=coloring.GRAY)
+         embed.set_footer(text=f"Try again in {round(error.retry_after, 2)} seconds.")
+         await ctx.send(embed=embed)
     elif isinstance(error, commands.NotOwner):
         await type(ctx)
         embed = discord.Embed(title="",
