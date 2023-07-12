@@ -7,8 +7,7 @@ async def type(ctx):
     async with ctx.typing():
             await asyncio.sleep(0.5)
 
-
-class MyView(discord.ui.View):
+class IMGBRANDING(discord.ui.View):
     @discord.ui.button(label="IMG", style=discord.ButtonStyle.gray, disabled=True)
     async def button_callback(self, button, interaction):
         await interaction.response.send_message("Woah how did you click this button") 
@@ -22,7 +21,7 @@ class Developer(commands.Cog):
     async def ping(self, ctx):
         await type(ctx)
         embed = discord.Embed(title='Pong!', description=f'Pong! {round(self.bot.latency * 1000)}ms', color=coloring.GRAY)
-        await ctx.send(embed=embed)
+        await ctx.send(embed=embed, view=IMGBRANDING())
                               
 async def setup(bot):
     await bot.add_cog(Developer(bot))
