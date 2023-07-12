@@ -8,8 +8,12 @@ async def type(ctx):
             await asyncio.sleep(0.5)
 
 class IMGBRANDING(discord.ui.View):
-    @discord.ui.button(label="IMG", style=discord.ButtonStyle.gray, disabled=True)
-    async def button_callback(self, button, interaction):
+    @discord.ui.button(label="IMG", style=discord.ButtonStyle.blurple, disabled=True)
+    async def IMGButton1(self, button, interaction):
+        await interaction.response.send_message("Woah how did you click this button") 
+
+    @discord.ui.button(label="@w3mbu", style=discord.ButtonStyle.green, disabled=True)
+    async def MIDDLE(self, button, interaction):
         await interaction.response.send_message("Woah how did you click this button") 
 
 class Developer(commands.Cog):
