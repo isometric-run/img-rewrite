@@ -16,7 +16,7 @@ async def on_command_error(ctx, error):
     elif isinstance(error, commands.NotOwner):
         await type(ctx)
         embed = discord.Embed(title="",
-                              description="<:guildCross:1127730060661641226> This command is only for the owner.",
+                              description="This command is only for the **owner**.",
                               color=0x2F3136)
         await ctx.send(embed=embed)
         print(f"[ ✕ ] {ctx.author.name} tried to use {ctx.command.name} but was not the owner.")
