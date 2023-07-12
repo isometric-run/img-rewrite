@@ -4,7 +4,24 @@ import os
 
 bot = commands.AutoShardedBot(command_prefix="+",
                               intents=discord.Intents().all(),
-                              help_command=None)
+                              help_command=None,
+                              shard_count=1)
+
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        await ctx.send("Command not found.")
+    elif isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send("Missing required argument.")
+    elif isinstance(error, commands.NotOwner):
+        await type(ctx)
+        embed = discord.Embed(title="",
+                              description="<:guildCross:1127730060661641226> This command is only for the owner.",
+                              color=0x2F3136)
+        await ctx.send(embed=embed)
+        print(f"[ ✕ ] {ctx.author.name} tried to use {ctx.command.name} but was not the owner.")
+    else:
+        await ctx.send("An error occurred.")
 
 @bot.event
 async def on_connect():
