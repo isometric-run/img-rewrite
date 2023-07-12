@@ -9,7 +9,6 @@ class Spotify(commands.Cog):
 
     # Spotify command
     @commands.group(name="spotify", aliases=["sp"], invoke_without_command=True)
-    @commands.cooldown(rate=3, per=10.0, type=commands.BucketType.user)
     async def spotify(self, ctx, target: discord.User = None):
         if ctx.command.is_on_cooldown(ctx):
             return
@@ -28,6 +27,7 @@ class Spotify(commands.Cog):
 
     # Spotify command
     @spotify.command(aliases=["cover"])
+    @commands.cooldown(1, 5, commands.BucketType.user)
     async def album(self, ctx, target: discord.User = None):
         target = target or ctx.author
         for activity in target.activities:
@@ -51,6 +51,7 @@ class Spotify(commands.Cog):
         await ctx.send(embed=embed)
 
     @spotify.command(aliases=["song", "np"])
+    @commands.cooldown(1, 5, commands.BucketType.user)
     async def track(self, ctx, target: discord.Member = None):
         target = target or ctx.author
         for activity in target.activities:

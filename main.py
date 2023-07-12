@@ -16,6 +16,8 @@ async def on_command_error(ctx, error):
         await ctx.send("Command not found.")
     elif isinstance(error, commands.MissingRequiredArgument):
         await ctx.send("Missing required argument.")
+    elif isinstance(error, commands.CommandOnCooldown):
+         await ctx.send(f"{round(error.retry_after, 2)} seconds left")
     elif isinstance(error, commands.NotOwner):
         await type(ctx)
         embed = discord.Embed(title="",
@@ -43,6 +45,7 @@ async def on_ready():
 		    await bot.load_extension("cogs." + f[:-3])
 
 @bot.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def help(ctx, *, cog_name: str = None): # type: ignore
         if cog_name is None:
             cmd_count = 0

@@ -8,6 +8,7 @@ class AFK(commands.Cog):
         self.data = []
 
     @commands.command()
+    @commands.cooldown(1, 5, commands.BucketType.user)
     async def afk(self, ctx, *args):
         msg = ' '.join(args)
         self.data.append(ctx.author.id)

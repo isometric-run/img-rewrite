@@ -8,6 +8,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)
+    @commands.cooldown(1, 5, commands.BucketType.user)
     async def clear(self, ctx, count: int):
         embed = discord.Embed(title="",
                               description=f"Purged `{count}` messages from {ctx.channel}",
@@ -17,6 +18,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(kick_members=True)
+    @commands.cooldown(1, 5, commands.BucketType.user)
     async def kick(self, ctx, member: discord.Member, *, reason = None):
         if reason is None:
             reason = "There is no provided reason"
@@ -33,6 +35,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)
+    @commands.cooldown(1, 5, commands.BucketType.user)
     async def slowmode(self, ctx, seconds: int):
         
         
