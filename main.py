@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import os
+from themes import coloring
 
 bot = commands.AutoShardedBot(command_prefix="+",
                               intents=discord.Intents().all(),
@@ -17,7 +18,7 @@ async def on_command_error(ctx, error):
         await type(ctx)
         embed = discord.Embed(title="",
                               description="This command is only for the **owner**.",
-                              color=0x2F3136)
+                              color=coloring.GRAY)
         await ctx.send(embed=embed)
         print(f"[ ✕ ] {ctx.author.name} tried to use {ctx.command.name} but was not the owner.")
     else:
