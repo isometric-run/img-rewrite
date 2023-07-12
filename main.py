@@ -8,6 +8,7 @@ bot = commands.AutoShardedBot(command_prefix="+",
                               intents=discord.Intents().all(),
                               help_command=None,
                               shard_count=1)
+DEVGUILD = bot.get_guild(1127713855737442315)
 
 @bot.event
 async def on_command_error(ctx, error):
