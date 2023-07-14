@@ -1,24 +1,14 @@
 import discord
 from discord.ext import commands
-from datetime import datetime
 import os
-import json
-import asyncio
-import Paginator
 from themes import coloring
+import Paginator
 
 bot = commands.AutoShardedBot(command_prefix="-",
                               intents=discord.Intents().all(),
                               help_command=None,
                               shard_count=1)
 DEVGUILD = bot.get_guild(1127713855737442315)
-
-@bot.event
-async def on_ready():
-    dt = datetime.now()
-    nt = dt.strftime("%H:%M:%S")
-    print(f"Logged it at {nt}")
-    await bot.load_extension("jishaku")
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -104,14 +94,4 @@ async def help(ctx, *, cog_name: str = None): # type: ignore
             else:
                 await ctx.send("Invalid cog name.")
 
-async def main():
-    async with bot:
-        for filename in os.listdir('./cogs'):
-            if filename.endswith('.py'):
-                await bot.load_extension(f'cogs.{filename[:-3]}')
-        
-        await bot.start("MTEyMjQ5MTE0OTAxODQ3MjQ1OA.GpI93v.0YmYJcq4xcsEjAM7qAGTl4cEDYx8d2bwwbOSIc")
-
-
-if __name__ == "__main__":
-    asyncio.run(main())
+bot.run("MTEyMjQ5MTE0OTAxODQ3MjQ1OA.GpI93v.0YmYJcq4xcsEjAM7qAGTl4cEDYx8d2bwwbOSIc")
